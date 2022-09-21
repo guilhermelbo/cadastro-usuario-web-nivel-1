@@ -18,7 +18,5 @@ __pycache__/
 local_settings.py
 media
 
-#bootstrap
-bootstrap/
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#venv,Django
