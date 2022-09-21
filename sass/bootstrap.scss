@@ -1,0 +1,23 @@
+@import '../bootstrap/scss/functions';
+@import '../bootstrap/scss/variables';
+
+$color1: #504843;
+$color2: #505843;
+$color3: #BDCFC9;
+$color4: #506843;
+$color5: #304843;
+$color6: #404843;
+
+
+$custom-colors: (
+    "color1": $color1,
+    "color2": $color2,
+    "color3": $color3,
+    "color4": $color4,
+    "color5": $color5,
+    "color6": $color6,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import '../bootstrap/scss/bootstrap.scss';

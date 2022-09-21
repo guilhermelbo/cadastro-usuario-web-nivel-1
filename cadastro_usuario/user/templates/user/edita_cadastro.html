@@ -1,0 +1,268 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block titulo %}Editar cadastro{% endblock %}
+{% block titulo_navbar %}Editar cadastro{% endblock  %}
+
+{% block botao_logout_navbar %}
+    <a class="btn btn-color3 me-2 px-5" href="{% url 'logout' %}">Logout</a>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/cadastro.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="row bg-color3 h-100 mx-0 align-items-center justify-content-center flex-column pt-5">
+        <div class="col-lg-7">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <div class="alert alert-danger text-center mb-4" role="alert">
+                            {{message}}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <form class="needs-validation" method="POST" action="{% url 'valida_cadastro' %}" novalidate>{% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Nome</h5>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
+                            </div>
+                            <input name="nome" id="nome" type="text" class="form-control form-control-lg" placeholder="Digite o nome" value="{{nome}}" maxlength=50 required>
+                            <div class="invalid-feedback">
+                                O campo nome não pode estar vazio.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Email</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </span>
+                            </div>
+                            <input name="email" id="email" type="email" class="form-control form-control-lg" placeholder="Digite o email" value="{{email}}" maxlength=50 required>
+                            <div class="invalid-feedback">
+                                Digite um email válido. Ex.: nome@gmail.com
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">CPF</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
+                            </div>
+                            <input name="cpf" id="cpf" type="text" class="form-control form-control-lg" placeholder="Digite o cpf" value="{{cpf}}" onkeyup="cpfMask(this)" minlength=14 maxlength=14 required>
+                            <div class="invalid-feedback">
+                                Digite um cpf válido, apenas números. Ex.: 123.456.789-12
+                            </div>
+                        </div> 
+                    </div>
+                </div>   
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">PIS</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
+                            </div>
+                            <input name="pis" id="pis" type="text" class="form-control form-control-lg" placeholder="Digite o pis" value="{{pis}}" onkeyup="pisMask(this)" minlength=14 maxlength=14 required>
+                            <div class="invalid-feedback">
+                                Digite um pis válido, apenas números. Ex.: 123.456.7891-2
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">País</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-globe"></i>
+                                </span>
+                            </div>
+                            <input name="pais" id="pais" type="text" class="form-control form-control-lg" placeholder="Digite o país" value="{{pais}}" maxlength=50 required>
+                            <div class="invalid-feedback">
+                                O campo país não pode estar vazio.
+                            </div>
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Estado</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-globe"></i>
+                                </span>
+                            </div>
+                            <input name="estado" id="estado" type="text" class="form-control form-control-lg" placeholder="Digite o estado" value="{{estado}}" maxlength=50 required>
+                            <div class="invalid-feedback">
+                                O campo estado não pode estar vazio.
+                            </div>
+                        </div> 
+                    </div>
+                </div>  
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Município</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-globe"></i>
+                                </span>
+                            </div>
+                            <input name="municipio" id="municipio" type="text" class="form-control form-control-lg" placeholder="Digite o município" value="{{municipio}}" maxlength=50 required>
+                            <div class="invalid-feedback">
+                                O campo município não pode estar vazio.
+                            </div>
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">CEP</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-globe"></i>
+                                </span>
+                            </div>
+                            <input name="cep" id="cep" type="text" class="form-control form-control-lg" placeholder="Digite o cep" value="{{cep}}" onkeyup="cepMask(this)" minlength=9 maxlength=9 required>
+                            <div class="invalid-feedback">
+                                Digite um cep válido apenas números. Ex.: 12345-678
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Rua</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-globe"></i>
+                                </span>
+                            </div>
+                            <input name="rua" id="rua" type="text" class="form-control form-control-lg" placeholder="Digite a rua" value="{{rua}}" maxlength=50 required>
+                            <div class="invalid-feedback">
+                                O campo rua não pode estar vazio.
+                            </div>
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Número</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-globe"></i>
+                                </span>
+                            </div>
+                            <input name="numero" type="number" class="form-control form-control-lg" placeholder="Digite o número (opcional)" value="{{numero}}">
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Complemento</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-globe"></i>
+                                </span>
+                            </div>
+                            <input name="complemento" type="text" class="form-control form-control-lg" placeholder="Digite o complemento (opcional)" value="{{complemento}}">
+                        </div> 
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Senha</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-key-fill"></i>
+                                </span>
+                            </div>
+                            <input name="senha" id="senha" type="password" class="form-control form-control-lg" placeholder="Digite a senha" value="{{senha}}" required>
+                            <div class="invalid-feedback">
+                                O campo senha não pode estar vazio e precisa ser igual ao campo de confirmar a senha.
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <h5 class="mb-1">Confirme a senha</h5>
+                    </div>
+                    <div class="col-md-9 mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend input-group-lg">
+                                <span class="input-group-text">
+                                    <i class="bi bi-key-fill"></i>
+                                </span>
+                            </div>
+                            <input name="confirma_senha" id="confirma_senha" type="password" class="form-control form-control-lg" placeholder="Confirme a senha" value="{{senha}}" required>
+                            <div class="invalid-feedback">
+                                O campo confirme a senha não pode estar vazio e precisa ser igual ao campo de senha.
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row mb-5 px-3">
+                    <div class="col-6">
+                        <a class="btn btn-danger w-100" href="{% url 'deleta_cadastro' %}">Deletar usuário</a>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-color1 w-100" type="submit">Salvar</button>
+                    </div>
+                </div>             
+            </form>
+        </div>
+    </div>
+{% endblock %}

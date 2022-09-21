@@ -1,0 +1,24 @@
+# Virtualenv
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+
+#django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+media
+
+#bootstrap
+bootstrap/
+
+# End of https://mrkandreev.name/snippets/gitignore-generator/#venv,Django
