@@ -18,5 +18,6 @@ __pycache__/
 local_settings.py
 media
 
+.env
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#venv,Django
