@@ -39,4 +39,16 @@ class UsuarioViewsTest(TestCase):
         response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'user/home.html')
     
+    def test_home_view_context_if_user_not_logged(self):
+        response = self.client.get(reverse('home'))
+        context = {
+            'usuario': 'visitante',
+            'logado': False
+        }
+        for c in context:
+            self.assertEqual(response.context[c], context[c])
     
+    def test_home_view_content_if_user_not_logged(self):
+        response = self.client.get(reverse('home'))
+        print(response.content.decode('utf-8'))
+        self.assertIn('Olá visitante', response.content.decode('utf-8'))
