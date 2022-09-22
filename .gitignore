@@ -19,5 +19,6 @@ local_settings.py
 media
 
 .env
+.vscode
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#venv,Django
