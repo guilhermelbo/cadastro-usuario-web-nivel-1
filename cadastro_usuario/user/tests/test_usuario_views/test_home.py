@@ -19,7 +19,7 @@ class HomeTest(TestCase):
             'complemento': 'a',
             'senha': 'a',
         }
-        client.post(reverse('valida_cadastro'), data, follow=True)
+        client.post(reverse('valida_cadastro'), data)
         client.post(reverse('valida_login'), {'login': 'a@a', 'senha':'a'})
         return client
 
