@@ -57,3 +57,9 @@ class HomeTest(TestCase):
         }
         for c in context:
             self.assertEqual(response.context[c], context[c])
+
+    def test_home_view_content_when_user_is_logged(self):
+        client = self.cliente_logado()
+        response = client.get(reverse('home'))
+        self.assertIn('Olá a', response.content.decode('utf-8'))
+        self.assertIn('Editar dados cadastrais', response.content.decode('utf-8'))
