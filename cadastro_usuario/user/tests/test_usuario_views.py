@@ -50,5 +50,4 @@ class UsuarioViewsTest(TestCase):
     
     def test_home_view_content_if_user_not_logged(self):
         response = self.client.get(reverse('home'))
-        print(response.content.decode('utf-8'))
         self.assertIn('Olá visitante', response.content.decode('utf-8'))
